@@ -23,11 +23,13 @@ import edu.wpi.first.wpilibj.Timer;
  * this system. Use IterativeRobot or Command-Based instead if you're new.
  */
 public class Robot extends SampleRobot {
-	Solenoid noid;
+	Solenoid noidzero;
+	Solenoid noidone;
 	Joystick stick;
 	
 	public Robot() {
-		noid = new Solenoid(0);
+		noidzero = new Solenoid(0);
+		noidone = new Solenoid(1);
 		stick = new Joystick(0);
 	}
 	
@@ -41,7 +43,8 @@ public class Robot extends SampleRobot {
 	 */
 	public void operatorControl() {
 		while (isOperatorControl() && isEnabled()) {
-			noid.set(stick.getY() > 0.5);
+			noidzero.set(stick.getY() > 0.5);
+			noidone.set(stick.getY() < 0.5);
 			Timer.delay(0.005); // wait for a motor update time
 		}
 	}
